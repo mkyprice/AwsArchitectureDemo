@@ -8,6 +8,7 @@ namespace AwsArchitectureDemo.Controllers;
 public class WeatherForecastController : ControllerBase
 {
 	private readonly ILogger<WeatherForecastController> _logger;
+	private static readonly string VERSION_GUID = Guid.NewGuid().ToString();
 
 	public WeatherForecastController(ILogger<WeatherForecastController> logger)
 	{
@@ -18,7 +19,7 @@ public class WeatherForecastController : ControllerBase
 	[Route("/")]
 	public string Get()
 	{
-		return "Service is available";
+		return $"Service is available with guid: {VERSION_GUID}";
 	}
 
 	[HttpGet]
@@ -39,7 +40,7 @@ public class WeatherForecastController : ControllerBase
 	private WeatherForecast[] ReadForecasts()
 	{
 		WeatherForecast[] weather = null;
-		for (int i = 0; i < 5000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			string json = System.IO.File.ReadAllText("Weather.json");
 			weather = JsonConvert.DeserializeObject<WeatherForecast[]>(json);
