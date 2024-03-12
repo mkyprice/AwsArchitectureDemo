@@ -1,0 +1,2 @@
+PID=$(ps -ef | grep dotnet)
+kill -9 $PID
